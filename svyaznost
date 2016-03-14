@@ -1,0 +1,28 @@
+import matplotlib.pyplot as plt
+import networkx as nx
+G =nx.Graph()
+G.add_edge(1,2)
+G.add_edge(1,8)
+G.add_edge(2,3)
+G.add_edge(2,8)
+G.add_edge(3,4)
+G.add_edge(3,8)
+G.add_edge(4,7)
+G.add_edge(4,9)
+G.add_edge(5,6)
+G.add_edge(5,7)
+G.add_edge(7,8)
+
+def bfs(G, start,fired):
+    fired.add(start)
+    queue=[start]
+    while queue:
+        current = queue.pop(0)
+        for neighbour in G[current]:
+            if neighbour not in fired:
+                fired.add(neighbour)
+                queue.append(neighbour)
+
+fired = set()
+bfs(G, 1, fired)
+print('Вершины, входящие в компоненту связности:',fired)
